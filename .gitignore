@@ -1,0 +1,6 @@
+# To be nice.
+
+.DS_Store
+__pycache__
+build
+story.spec
