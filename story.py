@@ -1,3 +1,5 @@
+from sys import exit
+
 moments_dict = {
     "Beg": {
         "text": "\nWelcome to my story of science!\nYou will use the number keys to make choices as you learn about Archimedes.",
@@ -10,7 +12,6 @@ moments_dict = {
         "choices": ["Beg"]
     }
 }
-
 class Moment:
     def __init__(self, moment_name):
         self.text = moments_dict[moment_name]['text']
@@ -20,19 +21,20 @@ class Moment:
     def run(self):
         print(self.text)
 
-        usr_input = input(self.prompt)
+        valid_input = False
+        while not valid_input:
+            usr_input = input(self.prompt)
 
-        if usr_input == 'e':
-            exit()
-
-        while True:
+            if usr_input == 'e':
+                exit()
+                
             try:
-                choice_index = int(input(self.prompt)) - 1
+                choice_index = int(usr_input) - 1
 
                 if choice_index >= 0 and choice_index < len(self.choices):
+                    valid_input = True
                     next_moment = Moment(self.choices[choice_index])
                     next_moment.run()
-                    break
                 else:
                     print("\nINVALID INPUT :(\n") 
             except ValueError:
